@@ -1,10 +1,11 @@
 #Accept serial commands and output Joystick
 #Expecting four frames to receive from serial
+
 import serial
 
 #Customize Parameters
-COM = "COM5"
-NUMFRAMES = 2
+COM = "COM5"    #Com Port
+NUMFRAMES = 2   #Number of bytes to capture
 
 print("Connecting...")
 s = serial.Serial(COM)
