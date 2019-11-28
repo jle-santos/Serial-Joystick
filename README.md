@@ -1,11 +1,8 @@
 # Serial Joystick
  
-Accepts gamepad inputs via serial port and converts them to xInput commands 
+Accepts gamepad inputs via serial port and converts them to XInput commands 
 
-Uses: 
-
-PyvJoy
-
-vJoy
-
-x360ce
+Uses:  
+PyvJoy  
+vJoy  
+x360ce  
