@@ -12,6 +12,12 @@ print("Connecting...")
 s = serial.Serial(COM)
 print("Connected to -> ", COM)
 
+# X, Tri, Cir, Sqr, R1, L1, Start, Select
+FaceButtons = [1, 4, 2, 3, 6, 5, 8, 7]
+
+# Up, Down, Left, Right
+DPad = [9, 10, 11, 12]
+
 while True:
     res = s.read(NUMFRAMES)
 
@@ -21,11 +27,27 @@ while True:
     X = res[2:3]
     Y = res[3:4]
 
-    Face, DPad = int.from_bytes(FrameA, "big"), int.from_bytes(FrameB, "big")
+    # Read all the data
+    Face, DRaw = bin(int.from_bytes(FrameA, "big")), bin(int.from_bytes(FrameB, "big"))
     dataX, dataY = int.from_bytes(X, "big"), int.from_bytes(Y, "big")
 
-    print("F: ", Face, "| D: ", DPad, "| J: X: ", dataX, "| Y: ", dataY)
+    # Slice DPad
+    for Dir in range(len(DPad)):
+        if DRaw[Dir] == '1':
+            Joystick.set_button(DPad[Dir], 1)
+        else:
+            Joystick.set_button(DPad[Dir], 0)
+
+    # Slice Buttons
+    for Command in range(len(FaceButtons)):
+        if Face[Command] == '1':
+            Joystick.set_button(FaceButtons[Command], 1)
+        else:
+            Joystick.set_button(FaceButtons[Command], 0)
 
     # Map joystick axes
     Joystick.set_axis(pyvjoy.HID_USAGE_X, dataX * 128)
     Joystick.set_axis(pyvjoy.HID_USAGE_Y, dataY * 128)
+
+    #Print to screen
+    print("F: ", Face, "| D: ", DRaw, "| J: X: ", dataX, "| Y: ", dataY)
