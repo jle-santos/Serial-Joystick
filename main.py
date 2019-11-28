@@ -5,18 +5,18 @@ import serial
 Joystick = pyvjoy.VJoyDevice(1)
 
 # Customize Parameters
-COM = "COM5"  # Com Port
+COM = "COM4"  # Com Port
 NUMFRAMES = 4  # Number of bytes to capture
 
 print("Connecting...")
 s = serial.Serial(COM)
 print("Connected to -> ", COM)
 
-# X, Tri, Cir, Sqr, R1, L1, Start, Select
-FaceButtons = [1, 4, 2, 3, 6, 5, 8, 7]
+# B, X, RB, LB, Start, Select
+FaceButtons = [2, 3, 6, 5, 8, 7]
 
-# Up, Down, Left, Right
-DPad = [9, 10, 11, 12]
+# Up, Down, Left, Right, A, Y
+DPad = [9, 10, 11, 12, 1, 4]
 
 while True:
     res = s.read(NUMFRAMES)
@@ -33,14 +33,14 @@ while True:
 
     # Slice DPad
     for Dir in range(len(DPad)):
-        if DRaw[Dir] == '1':
+        if DRaw[Dir+2] == '1':
             Joystick.set_button(DPad[Dir], 1)
         else:
             Joystick.set_button(DPad[Dir], 0)
 
     # Slice Buttons
     for Command in range(len(FaceButtons)):
-        if Face[Command] == '1':
+        if Face[Command+2] == '1':
             Joystick.set_button(FaceButtons[Command], 1)
         else:
             Joystick.set_button(FaceButtons[Command], 0)
