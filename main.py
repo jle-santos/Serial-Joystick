@@ -1,6 +1,7 @@
 import serial
 import keyboard
 
+<<<<<<< Updated upstream
 # Customize Parameters
 COM = "COM5"  # Com Port
 NUMFRAMES = 4  # Number of bytes to capture
@@ -18,16 +19,49 @@ DPad = ['w', 's', 'a', 'd', 'f', 'g']
 while True:
     res = s.read(NUMFRAMES)
 
+=======
+print("Serial Joystick to Key Presses V1")
+COM_NUM = input("Enter COM Port to connect: #")
+
+COM = "COM"+COM_NUM
+
+# Customize Parameters
+NUMFRAMES = 4  # Number of bytes to capture
+
+print("Connecting...")
+s = serial.Serial(COM)
+
+if s.isOpen():
+    print("Connected to -> ", COM)
+
+# B, X, RB, LB, Start, Select
+FaceButtons = ['c', 'v', 'e', 'q', 'z', 'x']
+
+# Up, Down, Left, Right, A, Y
+DPad = ['w', 's', 'a', 'd', 'f', 'g']
+
+while True:
+    res = s.read(NUMFRAMES)
+
+>>>>>>> Stashed changes
     # Slice response into separate frames
     FrameA = res[:1]
     FrameB = res[1:2]
     X = res[2:3]
     Y = res[3:4]
+<<<<<<< Updated upstream
 
     # Read all the data
     Face, DRaw = bin(int.from_bytes(FrameA, "big")), bin(int.from_bytes(FrameB, "big"))
     dataX, dataY = int.from_bytes(X, "big"), int.from_bytes(Y, "big")
 
+=======
+
+    # Read all the data
+    Face, DRaw = bin(int.from_bytes(FrameA, "big")), bin(int.from_bytes(FrameB, "big"))
+    dataX, dataY = int.from_bytes(X, "big"), int.from_bytes(Y, "big")
+
+>>>>>>> Stashed changes
     # Left Stick X
     if dataX > 200:
         keyboard.press('d')
@@ -59,4 +93,8 @@ while True:
             keyboard.release(keyF)
 
     #Print to screen
+<<<<<<< Updated upstream
     output = ("F: ", Face, "| D: ", DRaw, "| J: X: ", dataX, "| Y: ", dataY)
+=======
+    output = ("F: ", Face, "| D: ", DRaw, "| J: X: ", dataX, "| Y: ", dataY)
+>>>>>>> Stashed changes
