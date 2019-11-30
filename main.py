@@ -1,5 +1,7 @@
 import pyvjoy
 import serial
+#Alpha 1
+
 
 # Constants
 NUMFRAMES = 4  # Number of bytes to capture
