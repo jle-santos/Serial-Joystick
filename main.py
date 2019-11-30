@@ -1,5 +1,4 @@
 import pyvjoy
-from time import sleep
 import serial
 
 # Constants
@@ -12,25 +11,20 @@ Joystick2 = pyvjoy.VJoyDevice(2)
 # Customize Parameters
 # Ask for Input
 print("Serial Joystick V1 - ELEX 7820")
-numCtrl = input("How many controllers to connect? (MAX:2): ")
+print("Dual Control Mode")
 COM_LIST = []
 
-for i in range(int(numCtrl)):
-    print("Controller ", i)
-    COM_PORT = input("Enter Com Port:")
-    COM_LIST.append(COM_PORT)
+COM1 = input("Enter Controller 1 port: ")
+COM2 = input("Enter Controller 2 port: ")
 
 print("Connecting...")
 
-s = serial.Serial(COM_LIST[0], baudrate=9600)
+s = serial.Serial(COM1, baudrate=9600)
+s2 = serial.Serial(COM2, baudrate=9600)
 
-if numCtrl == 2:
-    s2 = serial.Serial(COM_LIST[1], baudrate=9600)
+print("Connected to: ", COM1, COM2)
 
-for com in COM_LIST:
-    print("Connected to: ", com)
-
-
+print("Sending to vJoy")
 
 
 # B, X, RB, LB, Start, Select
