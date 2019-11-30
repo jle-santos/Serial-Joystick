@@ -1,5 +1,4 @@
 import pyvjoy
-from time import sleep
 import serial
 
 
@@ -11,6 +10,7 @@ Joystick = pyvjoy.VJoyDevice(1)
 
 
 # Customize Parameters
+<<<<<<< Updated upstream
 
 COM = "COM4"  # Com Port
 
@@ -24,6 +24,21 @@ s = serial.Serial(COM, baudrate=9600)
 
 print("Connected to -> ", COM)
 
+=======
+# Ask for Input
+print("Serial Joystick V1 - ELEX 7820")
+print("Dual Controller Mode")
+
+COM1 = "COM5"
+COM2 = "COM8"
+
+print("Connecting...")
+s = serial.Serial(COM1, baudrate=9600)
+s2 = serial.Serial(COM2, baudrate=9600)
+
+print("Connected to: ", COM1, COM2)
+print("Now sending to vJoy")
+>>>>>>> Stashed changes
 
 
 # B, X, RB, LB, Start, Select
