@@ -69,7 +69,7 @@ def SendCommands(res, Joy):
 
     Joy.set_axis(pyvjoy.HID_USAGE_X, dataX * 128)
 
-    Joy.set_axis(pyvjoy.HID_USAGE_Y, dataY * 128)
+    Joy.set_axis(pyvjoy.HID_USAGE_Y, abs((dataY-256) * 128))
 
     # Print to screen
     output = ("F: ", Face, "| D: ", DRaw, "| J: X: ", dataX, "| Y: ", dataY)
